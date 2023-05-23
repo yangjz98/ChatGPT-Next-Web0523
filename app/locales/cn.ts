@@ -176,7 +176,7 @@ const cn = {
   },
   Store: {
     DefaultTopic: "新的聊天",
-    BotHello: "有什么可以帮你的吗？遇见问题可以求助百宝【BBX-BOY】",
+    BotHello: "有什么可以帮你的吗？遇见问题可以在公众号【百宝AI学长】求助百宝",
     Error: "出错了，稍后重试吧",
     Prompt: {
       History: (content: string) => "这是历史聊天总结作为前情提要：" + content,
