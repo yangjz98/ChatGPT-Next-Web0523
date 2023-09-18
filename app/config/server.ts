@@ -30,23 +30,25 @@ const ACCESS_CODES = (function getAccessCodes(): Set<string> {
   }
 })();
 
-export const getServerSideConfig = () => {
-  if (typeof process === "undefined") {
-    throw Error(
-      "[Server Config] you are importing a nodejs-only module outside of nodejs",
-    );
-  }
-
-  return {
-    apiKey: process.env.OPENAI_API_KEY,
-    code: process.env.CODE,
-    codes: ACCESS_CODES,
-    needCode: ACCESS_CODES.size > 0,
-    baseUrl: process.env.BASE_URL,
-    proxyUrl: process.env.PROXY_URL,
-    isVercel: !!process.env.VERCEL,
-    hideUserApiKey: !!process.env.HIDE_USER_API_KEY,
-    disableGPT4: !!process.env.DISABLE_GPT4,
-    hideBalanceQuery: !!process.env.HIDE_BALANCE_QUERY,
+export const getServerSideConfig = () => {​
+  if (typeof process === "undefined") {​
+    throw Error(​
+      "[Server Config] you are importing a nodejs-only module outside of nodejs",​
+    );​
+  }​
+​
+  const apiKeys = (process.env.OPENAI_API_KEY ?? '').split(',')​
+  const apiKey = apiKeys.at(Math.floor(Math.random() * apiKeys.length)) ?? ''​
+  ​
+  return {​
+    apiKey,​
+    code: process.env.CODE,​
+    codes: ACCESS_CODES,​
+    needCode: ACCESS_CODES.size > 0,​
+    baseUrl: process.env.BASE_URL,​
+    proxyUrl: process.env.PROXY_URL,​
+    isVercel: !!process.env.VERCEL,​
+    hideUserApiKey: !!process.env.HIDE_USER_API_KEY,​
+    enableGPT4: !process.env.DISABLE_GPT4,
   };
 };
